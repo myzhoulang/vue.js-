@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue.js  实例</title>
+	<script src="../vue.js"></script>
+</head>
+<body>
+	<div id="app"></div>
+
+
+	<script>
+		
+		// 实例生命周期
+		// new -> 数据观察 －> 事件绑定 －> created ->  
+			// 没有el 或找不到(指定了 el 但是在dom上找不到) 就跳过编译 这时候不会触发 beforeCompile、compiled、ready
+
+			// 有el 或者在created事件处理函数里面 调用 $mount(el)  :el 存在就会执行编译
+			
+			// -> beforeCompile
+
+			// 是否有  template 选项
+			// 有  编译模版  将 el 中的内容替换成模版中的内容
+
+			// 没有
+			// 编译 el中的模版 
+
+			// -> compiled 
+		// -> ready
+
+		// 调用 vm.$destroy()
+		// -> beforeDestroy -> 解除数据绑定 子组件和事件监听 -> destroyed
+
+		var vm  = new Vue({
+			el:'#app',
+			template:'<h1>Template</h1>',	//这将会替换掉 el
+			created: function(ev){
+				console.log('created')
+				console.log(ev);
+				//this.$destroy();
+				// this.$mount('#app')
+			},
+			beforeCompile: function(ev){
+				console.log('beforeCompile');
+				console.log(ev);
+			},
+			compiled: function(ev){
+				console.log('compiled');
+				console.log(ev);
+			},
+			ready: function(ev){
+				console.log('ready');
+				console.log(ev);
+
+			},
+			beforeDestroy: function(ev){
+				console.log('beforeDestroy');
+				console.log(ev);
+			},
+			destroyed: function(ev){
+				console.log('destroyed');
+				console.log(ev);
+			}
+		});
+
+		
+	</script>
+</body>
+</html>
